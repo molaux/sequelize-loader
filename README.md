@@ -14,13 +14,13 @@ it expects the following file structure :
   src/
     models/
       index.js
-      repository1/
+      database1/
         extensions/
           Model2.cjs
         Model1.cjs
         Model2.cjs
         ...
-      repository2/
+      database2/
         Model1.cjs
         Model2.cjs
         ...
@@ -29,7 +29,7 @@ it expects the following file structure :
 ### **`model.json` example**
 ```json
 {
-  "repository1": {
+  "database1": {
     "development": {
       "username": "...",
       "password": "...",
@@ -44,7 +44,7 @@ it expects the following file structure :
       ...
     }
   },
-  "repository2": {
+  "database2": {
     "development": {
       ...
     },
@@ -60,13 +60,13 @@ it expects the following file structure :
 
 ## Example
 ```javascript
-import buildDatabasesRepositories from './models'
+import initModels from './models'
 
-const databases = await buildDatabasesRepositories()
+const databases = await initModels()
 
-// access repository1 sequelize instance
-databases.repository1.sequelize.sync({force: true})
+// access database1 sequelize instance
+databases.database1.sequelize.sync({force: true})
 
-// access repository2 model instance
-const model2s = await databases.repository2.Model2.findAll()
+// access database2 model instance
+const model2s = await databases.database2.Model2.findAll()
 ```

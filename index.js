@@ -17,7 +17,7 @@ dotenv.config()
 const Op = Sequelize.Op
 const env = process.env.NODE_ENV || 'development'
 
-const buildDatabasesRepositories = async () => {
+const initModels = async () => {
   const isDirectory = source => fs.lstatSync(source).isDirectory()
   const getDirectories = source =>
     fs.readdirSync(source)
@@ -68,4 +68,4 @@ const buildDatabasesRepositories = async () => {
   }
   return dbs
 }
-export default buildDatabasesRepositories
+export default initModels
