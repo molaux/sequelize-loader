@@ -39,7 +39,7 @@ const initModels = async () => {
       sequelize = new Sequelize(config.database, config.username, config.password, config)
     }
 
-    const db = await Promise.all(fs
+    const models = await Promise.all(fs
       .readdirSync(dbDirName)
       .filter(file => {
         return (file.indexOf('.') !== 0) && (file !== path.basename(__filename)) && (file.slice(-4) === '.cjs')
@@ -56,15 +56,13 @@ const initModels = async () => {
       return ({ ...o, [model.name]: model })
     }, {}))
 
-    Object.keys(db).forEach(modelName => {
-      if (db[modelName].associate) {
-        db[modelName].associate(db)
+    Object.keys(models).forEach(modelName => {
+      if (models[modelName].associate) {
+        models[modelName].associate(models)
       }
     })
-
-    db.sequelize = sequelize
-
-    dbs[dbName] = db
+  
+    dbs[dbName] = sequelize
   }
   return dbs
 }

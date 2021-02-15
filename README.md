@@ -68,5 +68,5 @@ const databases = await initModels()
 databases.database1.sequelize.sync({force: true})
 
 // access database2 model instance
-const model2s = await databases.database2.Model2.findAll()
+const model2s = await databases.database2.models.Model2.findAll()
 ```
